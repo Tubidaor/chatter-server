@@ -5,12 +5,14 @@ const wordsRouter = express.Router()
 
 
 wordsRouter
-  .route('/words')
+  .route('/wordcount')
   .get((req, res, next) => {
     const db = req.app.get('db')
-    WordsService.getAllWords(db)
+    WordsService.getWordCountByUserByChild(db)
       .then(words => {
-        res.json(words)
+        res
+          .status(200)
+          .json(words)
       })
       .catch(next)
   })

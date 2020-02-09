@@ -6,6 +6,9 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const app = express()
 const wordsRouter = require('./words/words-router')
+const childrenRouter = require('./children/children-router')
+const usersRouter = require('./users/user-router')
+
 
 const morganOption = ((NODE_ENV === 'production') ? 'tiny': 'common', {
     skip: () => NODE_ENV === 'test',
@@ -23,6 +26,8 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api', wordsRouter)
+app.use('/api', childrenRouter)
+app.use('/api', usersRouter)
 
 app.use(function errorHandler(error, req, res, next) {
   let response
