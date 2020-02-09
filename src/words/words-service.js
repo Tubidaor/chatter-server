@@ -25,8 +25,20 @@ const WordsService = {
         'cu.id',
       )
   },
-
-
+  insertWord(db, newWord) {
+    return db
+      .insert(newWord)
+      .into('chatter_words')
+      .returning('*')
+      .then(([word]) => word)
+  },
+  wordExistsCheck(db, words) {
+    return db
+      .from('chatter_words')
+      .where({words})
+      .first()
+      .then(word => !!word)
+  }
 
 }
 
