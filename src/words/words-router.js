@@ -7,16 +7,6 @@ const wordsRouter = express.Router()
 
 wordsRouter
   .route('/wordcount')
-  .get((req, res, next) => {
-    const db = req.app.get('db')
-    WordsService.getWordCountByUserByChild(db)
-      .then(words => {
-        res
-          .status(200)
-          .json(words)
-      })
-      .catch(next)
-  })
   .post(jsonBodyParser, (req, res, next) => {
     const { words, date_created, child_id } = req.body
     const newWord = {
@@ -43,6 +33,55 @@ wordsRouter
       })
       .catch(next)
   })
+
+  wordsRouter
+  .route('/wordcount/:id')
+  .get((req, res, next) => {
+    const  { id } = req.params
+    const db = req.app.get('db')
+    WordsService.getChildrenByUser(db, id)
+      .then(children => {
+        let childList =[]
+        children.map(child => childList.push(child.name_))
+        return childList
+      })
+      .then(childList => {
+        console.log(1 + childList)
+
+        let allWordsRes = new Promise(resolve => {
+          let allWords = []
+          for(let i = 0; i < childList.length; i++)
+            
+            WordsService.getWordCountByUserByChild(db, id, childList[i])
+              .then(words => {
+                allWords.push(words)
+                console.log(`run ${i} ${allWords}`)
+                // res
+                //   .status(200)
+                //   .json(allWords)
+                console.log(i, childList.length)
+                
+                if(i + 1 === childList.length) {
+                  console.log(allWords)
+                  
+                  resolve(allWords)
+                }
+              })
+          return allWords
+        })
+
+        allWordsRes
+          .then(allWordsResJson => {
+            res
+              .status(200)
+              .json(allWordsResJson)
+          })
+          
+        })
+      .catch(next)
+      
+  })
+
 
 
   module.exports = wordsRouter
