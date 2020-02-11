@@ -8,10 +8,10 @@ TRUNCATE
 
 INSERT INTO chatter_users( id, first_name, last_name, user_name, password)
 VALUES
-  (1, 'juan', 'baltazar', 'tubidaor', 'chumbis'),
-  (2, 'bob', 'baltazar', 'testuser', 'chumbis'),
-  (3, 'megan', 'baltazar', 'testuser1', 'chumbis'),
-  (4, 'mara', 'baltazar', 'testuser2', 'chumbis');
+  (1, 'juan', 'baltazar', 'tubidaor', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
+  (2, 'bob', 'baltazar', 'testuser', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
+  (3, 'megan', 'baltazar', 'testuser1', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
+  (4, 'mara', 'baltazar', 'testuser2', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW');
 
 INSERT INTO chatter_child (name_, gender, birthdate, parent_id)
 VALUES

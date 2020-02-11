@@ -5,6 +5,7 @@ const jsonBodyParser = express.json()
 const wordsRouter = express.Router()
 
 
+
 wordsRouter
   .route('/wordcount')
   .post(jsonBodyParser, (req, res, next) => {
@@ -55,15 +56,7 @@ wordsRouter
             WordsService.getWordCountByUserByChild(db, id, childList[i])
               .then(words => {
                 allWords.push(words)
-                console.log(`run ${i} ${allWords}`)
-                // res
-                //   .status(200)
-                //   .json(allWords)
-                console.log(i, childList.length)
-                
                 if(i + 1 === childList.length) {
-                  console.log(allWords)
-                  
                   resolve(allWords)
                 }
               })
