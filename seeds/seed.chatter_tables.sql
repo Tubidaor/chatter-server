@@ -6,12 +6,12 @@ TRUNCATE
   chatter_users
   RESTART IDENTITY CASCADE;
 
-INSERT INTO chatter_users( id, first_name, last_name, user_name, password)
+INSERT INTO chatter_users( id, email, first_name, last_name, user_name, password)
 VALUES
-  (1, 'juan', 'baltazar', 'tubidaor', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
-  (2, 'bob', 'baltazar', 'testuser', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
-  (3, 'megan', 'baltazar', 'testuser1', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
-  (4, 'mara', 'baltazar', 'testuser2', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW');
+  (1, 'name@gmail.com', 'juan','baltazar', 'tubidaor', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
+  (2, 'name1@gmail.com', 'bob', 'baltazar', 'testuser', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
+  (3, 'name2@gmail.com', 'megan', 'baltazar', 'testuser1', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW'),
+  (4, 'name3@gmail.com', 'mara', 'baltazar', 'testuser2', '$2a$12$NQSWFrJQivqidekDLcD6iO2vQrAuKMMGozV/8aBjbRI8Ge01ATZhW');
 
 INSERT INTO chatter_child (name_, gender, birthdate, parent_id)
 VALUES
