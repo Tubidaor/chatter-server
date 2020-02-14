@@ -2,6 +2,7 @@ const express = require('express');
 const UsersService = require('./user-service');
 const jsonBodyParser = express.json();
 const path = require('path');
+const requireAuth = require('../middleware/jwt-auth');
 
 
 const usersRouter = express.Router();
@@ -55,4 +56,26 @@ usersRouter
       .catch(next)
   })
 
+  usersRouter
+    .route('/:user_id')
+    .all(requireAuth)
+    .get(getUserProfile)
+
+    async function getUserProfile(req, res, next) {
+      try {
+        const user = await UsersService.userNameExists(
+          req.app.get('db'),
+          res.params.user_id
+        )
+      if(!user)
+        return res.status(404).json({
+          error: `Thing doesn't exist`
+        })
+
+        res.user = user
+        next()
+    } catch(error) {
+      next(error)
+    }
+  }
   module.exports = usersRouter

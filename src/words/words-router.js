@@ -1,13 +1,13 @@
 const express = require('express')
 const WordsService = require('./words-service')
 const jsonBodyParser = express.json()
-
+const requireAuth = require('../middleware/jwt-auth')
 const wordsRouter = express.Router()
 
 
 
 wordsRouter
-  .route('/wordcount')
+  .route('/words')
   .post(jsonBodyParser, (req, res, next) => {
     const { words, date_created, child_id } = req.body
     const newWord = {
@@ -36,11 +36,12 @@ wordsRouter
   })
 
   wordsRouter
-  .route('/wordcount/:id')
+  .route('/words/:userName')
+  .all(requireAuth)
   .get((req, res, next) => {
-    const  { id } = req.params
+    const  { user_id } = req.user
     const db = req.app.get('db')
-    WordsService.getChildrenByUser(db, id)
+    WordsService.getChildrenByUser(db, user_id)
       .then(children => {
         let childList =[]
         children.map(child => childList.push(child.name_))
@@ -74,6 +75,24 @@ wordsRouter
       .catch(next)
       
   })
+
+  async function getUserProfile(req, res, next) {
+    try {
+      const user = await UsersService.userNameExists(
+        req.app.get('db'),
+        res.params.user_id
+      )
+    if(!user)
+      return res.status(404).json({
+        error: `Thing doesn't exist`
+      })
+
+      res.user = user
+      next()
+  } catch(error) {
+    next(error)
+  }
+}
 
 
 
