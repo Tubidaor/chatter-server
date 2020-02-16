@@ -56,26 +56,26 @@ usersRouter
       .catch(next)
   })
 
-  usersRouter
-    .route('/:user_id')
-    .all(requireAuth)
-    .get(getUserProfile)
+  // usersRouter
+  //   .route('/:user_id')
+  //   .all(requireAuth)
+  //   .get(getUserProfile)
 
-    async function getUserProfile(req, res, next) {
-      try {
-        const user = await UsersService.userNameExists(
-          req.app.get('db'),
-          res.params.user_id
-        )
-      if(!user)
-        return res.status(404).json({
-          error: `Thing doesn't exist`
-        })
+  //   async function getUserProfile(req, res, next) {
+  //     try {
+  //       const user = await UsersService.userNameExists(
+  //         req.app.get('db'),
+  //         res.params.user_id
+  //       )
+  //     if(!user)
+  //       return res.status(404).json({
+  //         error: `Thing doesn't exist`
+  //       })
 
-        res.user = user
-        next()
-    } catch(error) {
-      next(error)
-    }
-  }
+  //       res.user = user
+  //       next()
+  //   } catch(error) {
+  //     next(error)
+  //   }
+  // }
   module.exports = usersRouter

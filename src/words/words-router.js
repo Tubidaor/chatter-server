@@ -1,7 +1,7 @@
 const express = require('express')
 const WordsService = require('./words-service')
 const jsonBodyParser = express.json()
-const requireAuth = require('../middleware/jwt-auth')
+const { requireAuth } = require('../middleware/jwt-auth')
 const wordsRouter = express.Router()
 
 
@@ -36,12 +36,14 @@ wordsRouter
   })
 
   wordsRouter
-  .route('/words/:userName')
+  .route('/:userName')
   .all(requireAuth)
   .get((req, res, next) => {
-    const  { user_id } = req.user
+    // const  { id } = req.user
+    const id = 1
+    console.log('userid is', id)
     const db = req.app.get('db')
-    WordsService.getChildrenByUser(db, user_id)
+    WordsService.getChildrenByUser(db, id)
       .then(children => {
         let childList =[]
         children.map(child => childList.push(child.name_))

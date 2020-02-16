@@ -25,7 +25,7 @@ app.get('/api', (req, res) => {
   res.json({ok: true});
 })
 
-app.use('/api', wordsRouter)
+app.use('/api/words', wordsRouter)
 app.use('/api', childrenRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/users', usersRouter)

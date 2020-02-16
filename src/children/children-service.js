@@ -1,11 +1,11 @@
   const ChildService = {
-  getChildrenByUser(db, user) {
+  getChildrenByUser(db, cu_id) {
     return db
       .from('chatter_child as cc')
       .select(
         'cc.name_'
       )
-      .where('cu.user_name', `${user}`)
+      .where('cu.id', `${cu_id}`)
       .join(
         'chatter_users as cu',
         'cc.parent_id',
