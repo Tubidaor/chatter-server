@@ -7,12 +7,13 @@ const wordsRouter = express.Router()
 
 
 wordsRouter
-  .route('/words')
+  .route('/')
   .post(jsonBodyParser, (req, res, next) => {
-    const { words, date_created, child_id } = req.body
+    const { words, child_id } = req.body
+    console.log(req.body)
     const newWord = {
       words,
-      date_created,
+      date_created: new Date(Date.now()),
       child_id,
     }
 
@@ -24,20 +25,21 @@ wordsRouter
         console.log(wordOk)
         if(wordOk)
           return res.status(404).json({error: `The word '${newWord.words}' already exists`})
-      })
+      
 
-    WordsService.insertWord(req.app.get('db'), newWord)
-      .then(word => {
-        res
-          .status(200)
-          .json(word)
+        return WordsService.insertWord(req.app.get('db'), newWord)
+          .then(word => {
+            res
+              .status(200)
+              .json(word)
+        })
       })
       .catch(next)
   })
 
   wordsRouter
   .route('/:userName')
-  .all(requireAuth)
+  // .all(requireAuth)
   .get((req, res, next) => {
     // const  { id } = req.user
     const id = 1

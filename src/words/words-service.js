@@ -5,13 +5,15 @@ const WordsService = {
     return db
       .from('chatter_words AS cw')
       .select(
+        'cc.id',
         'cc.name_ as name',
+        'cc.birthdate as birthdate',
         db.raw(
-          `cw.date_created as x, sum(count(distinct cw.words)) OVER (ORDER BY cw.date_created ASC) AS y`
+          `cw.date_created as date_created, sum(count(distinct cw.words)) OVER (ORDER BY cw.date_created ASC) AS word_count`
         ) 
       )
       .count('cw.words')
-      .groupBy('cc.name_','cw.date_created')
+      .groupBy('cc.id', 'cc.name_','cc.birthdate','cw.date_created')
       .where({'cu.id': `${id}`})
       .where({'cc.name_':`${child}`})
       .join(
