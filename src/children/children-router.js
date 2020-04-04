@@ -1,11 +1,12 @@
 const express = require('express');
 const ChildService = require('./children-service');
 const jsonBodyParser = express.json();
+const requireAuth = require('../middleware/jwt-auth')
 
 const childrenRouter = express.Router();
 
 childrenRouter
-  .route('/children')
+  .route('/')
   .get((req, res, next) => {
     const db = req.app.get('db')
     const user = 'tubidaor'
@@ -18,16 +19,17 @@ childrenRouter
       .catch(next)
   })
   .post(jsonBodyParser, (req, res, next) => {
-    const { name_, gender, birthdate, parent_id } = req.body
-    for(const field of [ 'name_', 'gender', 'birthdate', 'parent_id'])
+    const { name_, gender, birthdate } = req.body
+    const id = 1
+    for(const field of [ 'name_', 'gender', 'birthdate'])
       if(!req.body[field]) 
         return res.json({error: `Missing '${field}' in request body`})
       
     const newChild = {
       name_,
       gender,
-      birthdate: new Date(birthdate).toLocaleDateString('en-US'),
-      parent_id,
+      birthdate: birthdate,
+      parent_id: id
     }
     const childError = ChildService.validateDate(newChild)
 

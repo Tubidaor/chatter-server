@@ -26,7 +26,7 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/words', wordsRouter)
-app.use('/api', childrenRouter)
+app.use('/api/children', childrenRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/users', usersRouter)
 
