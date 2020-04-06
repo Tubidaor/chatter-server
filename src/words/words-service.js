@@ -34,10 +34,11 @@ const WordsService = {
       .returning('*')
       .then(([word]) => word)
   },
-  wordExistsCheck(db, words) {
+  wordExistsCheck(db, words, child_id) {
     return db
       .from('chatter_words')
       .where({words})
+      .where({child_id})
       .first()
       .then(word => !!word)
   },

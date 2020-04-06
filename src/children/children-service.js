@@ -3,7 +3,8 @@
     return db
       .from('chatter_child as cc')
       .select(
-        'cc.name_'
+        'cc.name_',
+        'cc.id'
       )
       .where('cu.id', `${cu_id}`)
       .join(

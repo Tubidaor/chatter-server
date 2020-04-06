@@ -9,7 +9,7 @@ childrenRouter
   .route('/')
   .get((req, res, next) => {
     const db = req.app.get('db')
-    const user = 'tubidaor'
+    const user = 1
     ChildService.getChildrenByUser(db, user)
       .then(children => {
         res
