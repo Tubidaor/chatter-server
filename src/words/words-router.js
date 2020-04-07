@@ -8,6 +8,7 @@ const wordsRouter = express.Router()
 
 wordsRouter
   .route('/')
+  .all(requireAuth)
   .post(jsonBodyParser, (req, res, next) => {
     const { words, child_id } = req.body
     console.log(req.body)
@@ -39,11 +40,9 @@ wordsRouter
 
   wordsRouter
   .route('/:userName')
-  // .all(requireAuth)
+  .all(requireAuth)
   .get((req, res, next) => {
-    // const  { id } = req.user
-    const id = 1
-    console.log('userid is', id)
+    const { id } = req.user
     const db = req.app.get('db')
     WordsService.getChildrenByUser(db, id)
       .then(children => {
@@ -52,7 +51,6 @@ wordsRouter
         return childList
       })
       .then(childList => {
-        console.log(1 + childList)
 
         let allWordsRes = new Promise(resolve => {
           let allWords = []
@@ -79,25 +77,5 @@ wordsRouter
       .catch(next)
       
   })
-
-//   async function getUserProfile(req, res, next) {
-//     try {
-//       const user = await UsersService.userNameExists(
-//         req.app.get('db'),
-//         res.params.user_id
-//       )
-//     if(!user)
-//       return res.status(404).json({
-//         error: `Thing doesn't exist`
-//       })
-
-//       res.user = user
-//       next()
-//   } catch(error) {
-//     next(error)
-//   }
-// }
-
-
 
   module.exports = wordsRouter
