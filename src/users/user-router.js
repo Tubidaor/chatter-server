@@ -11,7 +11,7 @@ usersRouter
   .route('/')
   .post(jsonBodyParser, (req, res, next) => {
     const { email, password, user_name, first_name, last_name } = req.body
-    console.log(email)
+  
     for( const field of ['email', 'password', 'user_name', 'first_name', 'last_name'])
       if(!req.body[field])
         return res.status(400).json({

@@ -11,7 +11,7 @@ wordsRouter
   .all(requireAuth)
   .post(jsonBodyParser, (req, res, next) => {
     const { words, child_id } = req.body
-    console.log(req.body)
+   
     const newWord = {
       words,
       date_created: new Date(Date.now()),
@@ -23,7 +23,7 @@ wordsRouter
     
     WordsService.wordExistsCheck(req.app.get('db'), words, child_id )
       .then(wordOk => {
-        console.log(wordOk)
+        
         if(wordOk)
           return res.status(404).json({error: `The word '${newWord.words}' already exists.`})
       
