@@ -19,13 +19,13 @@ wordsRouter
     }
 
     if(!words)
-      return res.status(404).json({error: 'Missing a word'})
+      return res.status(404).json({error: 'Missing a word.'})
     
     WordsService.wordExistsCheck(req.app.get('db'), words, child_id )
       .then(wordOk => {
         console.log(wordOk)
         if(wordOk)
-          return res.status(404).json({error: `The word '${newWord.words}' already exists`})
+          return res.status(404).json({error: `The word '${newWord.words}' already exists.`})
       
 
         return WordsService.insertWord(req.app.get('db'), newWord)
