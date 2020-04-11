@@ -16,10 +16,19 @@ const morganOption = ((NODE_ENV === 'production') ? 'tiny': 'common', {
 
 app.use(morgan(morganOption))
 app.use(helmet())
-app.use(cors({
-  origin: true
-  })
+let whiteList= ['https://chatter-app.juanbaltazar.now.sh','http://localhost:3000']
+let corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (whiteList.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
+app.use(cors(corsOptionsDelegate)
 )
+
 
 app.get('/api', (req, res) => {
   res.json({ok: true});
