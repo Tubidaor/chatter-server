@@ -20,6 +20,10 @@ app.use(cors({
   origin: "https://chatter-app.juanbaltazar.now.sh"
   })
 )
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 app.get('/api', (req, res) => {
   res.json({ok: true});
