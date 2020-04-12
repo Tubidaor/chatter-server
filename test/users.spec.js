@@ -10,6 +10,7 @@ describe('user endpoints', function() {
   app.set('db', database)
 
   const testUsers = helpers.makeUsersArray()
+  const testChildren = helpers.makeChildrenArray()
   const testUser = testUsers[0]
 
   before('make knex instance', () => {
@@ -22,7 +23,8 @@ describe('user endpoints', function() {
 
   afterEach('clean up tables', () => helpers.cleanTables(database))
 
-  describe('login functionality', () => {
+  describe('login and reg form functionality', () => {
+
     context('user validation', () => {
       beforeEach('insert users', () =>
         helpers.seedUsers(
@@ -31,9 +33,9 @@ describe('user endpoints', function() {
         )
     )
 
-    const requiredFields = ['user_name', 'password']
+    const requiredLoginFields = ['user_name', 'password']
 
-    requiredFields.forEach(field => {
+    requiredLoginFields.forEach(field => {
       const loginAttemptBody = {
         user_name: 'test user_name',
         password: 'test password'
@@ -46,9 +48,51 @@ describe('user endpoints', function() {
         .post('/api/auth/login')
         .send(loginAttemptBody)
         .expect(400, {
-          error: `Missing '${field}' in request body`,
+          error: `Missing '${field}' in request body`
         })
       })
+
+
+    context('validate reg submission', () => {
+      const requiredRegFields = [
+        'email', 
+        'password',
+        'user_name',
+        'first_name',
+        'last_name'
+      ]
+
+      requiredRegFields.forEach(field => {
+        const regAttempt = {
+          email: 'test@email.com',
+          password: 'test password',
+          user_name: 'test user_name',
+          first_name: 'test first_name',
+          last_name: 'test last_name'
+        }
+      it('responds with 400, missing field if field is missing', () => {
+        delete regAttempt[field]
+
+        return supertest(app)
+        .post('/api/users')
+        .send(regAttempt)
+        .expect(400, {
+          error: `Missing '${field}' in request body`
+        })
+      })
+      })
+    } )
+    
+    // context('request children data', () => {
+    //   beforeEach('insert children', () => {
+    //     helpers.seedChildren(
+    //       database,
+    //       testChildren
+    //     )
+    //   })
+    // })
+
+
 
     })
     })

@@ -37,6 +37,47 @@ function makeUsersArray() {
   ]
 }
 
+function makeChildrenArray() {
+  [
+    {
+      name_: 'chumbis',
+      gender: 'female',
+      birthdate: '02/17/2017',
+      parent_id: 1
+    },
+    {
+      name_: 'ladybug',
+      gender: 'female',
+      birthdate: '02/17/2019',
+      parent_id: 1
+    },
+    {
+      name_: 'chumbawomba',
+      gender: 'female',
+      birthdate: '07/17/2020',
+      parent_id: 2,
+    },
+    {
+      name_: 'Faith',
+      gender: 'female',
+      birthdate: '02/17/2020',
+      parent_id: 2
+    },
+    {
+      name_: 'hungry hippo',
+      gender: 'female',
+      birthdate: '02/17/2020',
+      parent_id: 3
+    },
+    {
+      name_: 'mija',
+      gender: 'female',
+      birthdate: '02/17/2020',
+      parent_id: 4
+    }
+  ]
+}
+
 
 
 
@@ -66,9 +107,21 @@ function seedUsers(db, users) {
     ))
 }
 
+function seedChildren(db, children) {
+  return db.into('chatter_child').insert(children)
+    .then(() => {
+      db.raw(
+        `SELECT setval('chatter_users_id_seq', ?)`,
+        [children[children.length -1].id],
+      )
+    })
+}
+
 
 module.exports = {
   cleanTables,
   seedUsers,
   makeUsersArray,
+  makeChildrenArray,
+  seedChildren,
 }
