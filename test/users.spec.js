@@ -51,7 +51,7 @@ describe('user endpoints', function() {
           error: `Missing '${field}' in request body`
         })
       })
-
+    })
 
     context('validate reg submission', () => {
       const requiredRegFields = [
@@ -81,29 +81,10 @@ describe('user endpoints', function() {
         })
       })
       })
-    } )
-    
-    // context('request children data', () => {
-    //   beforeEach('insert children', () => {
-    //     helpers.seedChildren(
-    //       database,
-    //       testChildren
-    //     )
-    //   })
-    // })
-
-
-
     })
     })
   }
 )
-
-
-
-
-
-
 
   }
 )

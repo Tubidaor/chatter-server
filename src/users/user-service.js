@@ -25,6 +25,11 @@ const UsersService = {
       .first()
       .then(user => !!user)
   },
+  userNameId(db, user_name) {
+    return db('chatter_users')
+      .where({user_name})
+      .first()
+  },
   emailExists(db, email) {
     return db('chatter_users')
       .where({email})

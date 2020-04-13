@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 function makeUsersArray() {
   return [
@@ -38,7 +39,7 @@ function makeUsersArray() {
 }
 
 function makeChildrenArray() {
-  [
+  return [
     {
       name_: 'chumbis',
       gender: 'female',
@@ -78,6 +79,13 @@ function makeChildrenArray() {
   ]
 }
 
+function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
+  const token = jwt.sign({user_id: user.id }, secret, {
+    subject: user.user_name,
+    algorithm: 'HS256',
+  })
+  return `Bearer ${token}`
+}
 
 
 
@@ -124,4 +132,5 @@ module.exports = {
   makeUsersArray,
   makeChildrenArray,
   seedChildren,
+  makeAuthHeader,
 }

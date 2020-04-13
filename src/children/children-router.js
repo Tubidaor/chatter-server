@@ -1,21 +1,25 @@
 const express = require('express');
 const ChildService = require('./children-service');
 const jsonBodyParser = express.json();
-const { requireAuth } = require('../middleware/jwt-auth')
+const { requireAuth } = require('../middleware/jwt-auth');
+const UserServices = require('../users/user-service');
 
 const childrenRouter = express.Router();
 
 childrenRouter
-  .route('/')
+  .route('/:user_name')
   .all(requireAuth)
   .get((req, res, next) => {
     const db = req.app.get('db')
-    const { id } = req.user
-    ChildService.getChildrenByUser(db, id)
-      .then(children => {
-        res
-          .status(200)
-          .json(children)
+    UserServices.userNameId(db, req.params.user_name)
+      .then(user => {
+        const id = user.id
+        ChildService.getChildrenByUser(db, id)
+          .then(children => {
+            res
+              .status(200)
+              .json(children)
+          })
       })
       .catch(next)
   })
