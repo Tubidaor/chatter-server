@@ -25,7 +25,6 @@ describe('get request for children data', () => {
     beforeEach('load tables', () => {
       helpers.seedUsers(database, testUsers)
       helpers.seedChildren(database, testChildren)
-      
     })
 
     it('validate request for children data', () => {

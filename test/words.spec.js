@@ -18,11 +18,14 @@ describe('Words Endpoint', () => {
   before('make knex instance', () => {
     database
   })
-  before('clean up tables', () => helpers.cleanTables(database))
+  
   after('disconnect from db', () => database.destroy())
-  afterEach('clean up tables', () => helpers.cleanTables(database))
 
-    context('Word count by user is returned on json', () => {
+  before('clean up tables', () => helpers.cleanTables(database))
+  
+  afterEach('cleanup', () => helpers.cleanTables(database))
+
+    context('Word count by user is returned on json and word posting', () => {
       beforeEach('load tables', () => {
         helpers.seedUsers(database, testUsers)
         helpers.seedChildren(database, testChildren)
@@ -46,8 +49,35 @@ describe('Words Endpoint', () => {
               {"name": "chumbis"},
               {"name": "ladybug"},
               )
-          })
+            })
       })
     })
+      
+      context('Posting words', () => {
+        beforeEach('load tables', () => {
+          helpers.seedUsers(database, testUsers)
+          helpers.seedChildren(database, testChildren)
+        })
+
+        it('Posts word by user /api/words', () => {
+
+          const word = {
+            words: testWords[0].words,
+            date_created: new Date(testWords[0].date_created),
+            child_id: testWords[0].child_id,
+          }
+
+          return supertest(app)
+            .post('/api/words')
+            .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+            .send(word)
+            .expect(200)
+            .expect(res => {
+              expect(res.body.words).to.eql(testWords[0].words)
+            })
+          
+      })
+    })
+
 
 })
