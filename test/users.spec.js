@@ -1,6 +1,6 @@
 const knex = require('knex');
 const app = require('../src/app');
-const helpers = require('../test/test-helpers');
+const helpers = require('./test-helpers');
 
 describe('user endpoints', function() {
   let database = knex({
@@ -10,9 +10,7 @@ describe('user endpoints', function() {
   app.set('db', database)
 
   const testUsers = helpers.makeUsersArray()
-  const testChildren = helpers.makeChildrenArray()
-  const testUser = testUsers[0]
-
+ 
   before('make knex instance', () => {
     database
   })

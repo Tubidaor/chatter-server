@@ -22,7 +22,7 @@ describe('get request for children data', () => {
   afterEach('cleanup', () => helpers.cleanTables(database))
 
   context('requests children data', () => {
-    beforeEach('load children', () => {
+    beforeEach('load tables', () => {
       helpers.seedUsers(database, testUsers)
       helpers.seedChildren(database, testChildren)
       
