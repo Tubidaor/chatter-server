@@ -36,6 +36,17 @@ describe('Words Endpoint', () => {
           .get(`/api/words/${user_name}`)
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200)
+          .expect(res => {
+            expect(res.body).to.have.nested.property('[0][0].id')
+            expect(res.body).to.have.nested.property('[0][0].name')
+            expect(res.body).to.have.nested.property('[0][0].birthdate')
+            expect(res.body).to.have.nested.property('[0][0].date_created')
+            expect(res.body).to.have.nested.property('[0][0].word_count')
+            expect(res.body[0][0]).to.include(
+              {"name": "chumbis"},
+              {"name": "ladybug"},
+              )
+          })
       })
     })
 
