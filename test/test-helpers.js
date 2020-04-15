@@ -40,17 +40,17 @@ function makeUsersArray() {
 
 function makeChildrenArray() {
   return [
-    {
+    { 
       name_: 'chumbis',
       gender: 'female',
       birthdate: '02/17/2017',
-      parent_id: 1
+      parent_id: 1,
     },
     {
       name_: 'ladybug',
       gender: 'female',
       birthdate: '02/17/2019',
-      parent_id: 1
+      parent_id: 1,
     },
     {
       name_: 'chumbawomba',
@@ -62,19 +62,19 @@ function makeChildrenArray() {
       name_: 'Faith',
       gender: 'female',
       birthdate: '02/17/2020',
-      parent_id: 2
+      parent_id: 2,
     },
     {
       name_: 'hungry hippo',
       gender: 'female',
       birthdate: '02/17/2020',
-      parent_id: 3
+      parent_id: 3,
     },
     {
       name_: 'mija',
       gender: 'female',
       birthdate: '02/17/2020',
-      parent_id: 4
+      parent_id: 4,
     }
   ]
 }
@@ -84,222 +84,222 @@ function makeWordsArray() {
     {
       words: 'papa', 
       date_created: '06/30/2017',
-      child_id: 1
+      child_id: 1,
     },
     {
       words: 'mama', 
       date_created:'07/30/2017', 
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'pout',
       date_created:'08/30/2017', 
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'love',
       date_created: '08/30/2017',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'chumbis',
       date_created: '08/30/2017',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'te quiero mucho',
       date_created: '08/30/2017', 
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'abuelita',
       date_created: '10/30/2017',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'gracias',
       date_created: '10/30/2017',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'agua', 
       date_created: '11/30/2017',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'manzana', 
       date_created: '12/30/2017', 
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'por favor',
       date_created: '1/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'paloma',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'mara',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'simon',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'trevor',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'grandpa',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'mistake',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'milk',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'jelly',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'no',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'yes',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'mad',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'angry',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'sad',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'happy',
       date_created: '07/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'friend',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'sky',
       date_created: '06/30/2018',
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'fish',
       date_created: '06/30/2018',
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'bear', 
       date_created: '06/30/2018',
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'horse',
       date_created: '06/30/2018',
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'dog',
       date_created: '06/30/2018',
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'pancake', 
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'egg', 
       date_created: '06/30/2018',
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'chocolate', 
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'ham',
       date_created: '06/30/2018',
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'oatmeal',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'cereal',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'plate',
       date_created: '06/30/2018', 
-      child_id: 2
+      child_id: 2,
     },
     { 
       words: 'fork',
       date_created: '06/30/2018',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'instead',
       date_created: '06/30/2019',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'if',
       date_created: '06/30/2019',
-      child_id: 1
+      child_id: 1,
     },
     { 
       words: 'sleep',
       date_created: '06/30/2019',
-      child_id: 3
+      child_id: 3,
     },
     { 
       words: 'tired',
       date_created: '06/30/2019',
-      child_id: 3
+      child_id: 3,
     },
     { 
       words: 'sun',
       date_created: '06/30/2019',
-      child_id: 3
+      child_id: 3,
     }
   ]
 }
@@ -318,14 +318,36 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 
 
 function cleanTables(db) {
-  return db.raw(
+  return db.transaction(trx => 
+    trx.raw(
     `TRUNCATE
       chatter_words,
       chatter_child,
       chatter_users
-      RESTART IDENTITY CASCADE`
+    `
+  )
+  .then(() =>
+      Promise.all([
+        trx.raw(`ALTER SEQUENCE chatter_words_id_seq minvalue 0 START WITH 0`),
+        trx.raw(`ALTER SEQUENCE chatter_child_id_seq minvalue 0 START WITH 0`),
+        trx.raw(`ALTER SEQUENCE chatter_users_id_seq minvalue 0 START WITH 0`),
+        trx.raw(`SELECT setval('chatter_words_id_seq', 0)`),
+        trx.raw(`SELECT setval('chatter_child_id_seq', 0)`),
+        trx.raw(`SELECT setval('chatter_users_id_seq', 0)`),
+      ])
+    )
   )
 }
+
+function seedChatterTables(db, users, children, words) {
+  return db.transaction(async trx => {
+    await seedUsers(trx, users)
+    await seedChildren(trx, children)
+    await seedWords(trx, words)
+
+  })
+}
+
 
 function seedUsers(db, users) {
   const hashedUsers = users.map(user => ({
@@ -344,7 +366,7 @@ function seedChildren(db, children) {
   return db.into('chatter_child').insert(children)
     .then(() => {
       db.raw(
-        `SELECT setval('chatter_users_id_seq', ?)`,
+        `SELECT setval('chatter_child_id_seq', ?)`,
         [children[children.length -1].id],
       )
     })
@@ -369,5 +391,6 @@ module.exports = {
   seedChildren,
   makeAuthHeader,
   makeWordsArray,
-  seedWords
+  seedWords,
+  seedChatterTables,
 }

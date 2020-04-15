@@ -75,6 +75,7 @@ wordsRouter
             .status(200)
             .json(allWordsResJson)
         })
+        .done()
       })
       .catch(next)
       

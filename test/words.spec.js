@@ -11,9 +11,8 @@ describe('Words Endpoint', () => {
 
   app.set('db', database)
 
-  const testUsers = helpers.makeUsersArray()
-  const testChildren = helpers.makeChildrenArray()
-  const testWords = helpers.makeWordsArray()
+  
+ 
  
   before('make knex instance', () => {
     database
@@ -25,16 +24,21 @@ describe('Words Endpoint', () => {
   
   afterEach('cleanup', () => helpers.cleanTables(database))
 
-    context('Word count by user is returned on json and word posting', () => {
-      beforeEach('load tables', () => {
-        helpers.seedUsers(database, testUsers)
-        helpers.seedChildren(database, testChildren)
-        helpers.seedWords(database, testWords)
-      })
+    describe('Word count by user is returned on json and word posting', () => {
+     
+      const testUsers = helpers.makeUsersArray()
+      const testChildren = helpers.makeChildrenArray()
+      const testWords = helpers.makeWordsArray()
+
+      beforeEach('load tables', () =>
+        helpers.seedChatterTables(database, testUsers, testChildren, testWords)
+      )
+      afterEach('cleanup', () => helpers.cleanTables(database))
 
       it('Words by children by user /api/words/:user_name', () => {
         const user_name = testUsers[0].user_name
-        
+
+        console.log(testUsers[0])
         return supertest(app)
           .get(`/api/words/${user_name}`)
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
@@ -52,32 +56,59 @@ describe('Words Endpoint', () => {
             })
       })
     })
-      
+
       context('Posting words', () => {
-        beforeEach('load tables', () => {
-          helpers.seedUsers(database, testUsers)
-          helpers.seedChildren(database, testChildren)
-        })
+        
+        const testUsers = helpers.makeUsersArray()
+        const testChildren = helpers.makeChildrenArray()
+        const testWords = helpers.makeWordsArray()
+
+      beforeEach('load tables', () => 
+        helpers.seedChatterTables(database, testUsers, testChildren, testWords)
+      )
+      
+      afterEach('cleanup', () => helpers.cleanTables(database))
 
         it('Posts word by user /api/words', () => {
-
           const word = {
-            words: testWords[0].words,
-            date_created: new Date(testWords[0].date_created),
-            child_id: testWords[0].child_id,
+            words: 'coldwarkids',
+            child_id: 1,
           }
-
           return supertest(app)
             .post('/api/words')
             .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
             .send(word)
             .expect(200)
             .expect(res => {
-              expect(res.body.words).to.eql(testWords[0].words)
+              expect(res.body.words).to.eql(word.words)
             })
           
+        })
+      })
+      context('Posting words error', () => {
+        
+        const testUsers = helpers.makeUsersArray()
+        const testChildren = helpers.makeChildrenArray()
+        const testWords = helpers.makeWordsArray()
+
+      beforeEach('load tables', () => 
+        helpers.seedChatterTables(database, testUsers, testChildren, testWords)
+      )
+      
+      afterEach('cleanup', () => helpers.cleanTables(database))
+
+        it(`Responds with already exists`, () => {
+          const wordIncluded = {
+            words: 'papa',
+            child_id: 1,
+          }
+          return supertest(app)
+            .post('/api/words')
+            .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+            .send(wordIncluded)
+            .expect(404,
+                {error: `The word '${wordIncluded.words}' already exists.`})
+          })
       })
     })
 
-
-})
