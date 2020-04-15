@@ -38,7 +38,6 @@ describe('Words Endpoint', () => {
       it('Words by children by user /api/words/:user_name', () => {
         const user_name = testUsers[0].user_name
 
-        console.log(testUsers[0])
         return supertest(app)
           .get(`/api/words/${user_name}`)
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
@@ -84,20 +83,10 @@ describe('Words Endpoint', () => {
             })
           
         })
-      })
-      context('Posting words error', () => {
-        
-        const testUsers = helpers.makeUsersArray()
-        const testChildren = helpers.makeChildrenArray()
-        const testWords = helpers.makeWordsArray()
 
-      beforeEach('load tables', () => 
-        helpers.seedChatterTables(database, testUsers, testChildren, testWords)
-      )
-      
-      afterEach('cleanup', () => helpers.cleanTables(database))
 
         it(`Responds with already exists`, () => {
+
           const wordIncluded = {
             words: 'papa',
             child_id: 1,
@@ -108,6 +97,21 @@ describe('Words Endpoint', () => {
             .send(wordIncluded)
             .expect(404,
                 {error: `The word '${wordIncluded.words}' already exists.`})
+          })
+
+          it('Responds with error when word is missing', () => {
+
+            const wordMissing = {
+              words:'',
+              child_id: 1,
+            }
+            return supertest(app)
+            .post('/api/words')
+            .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+            .send(wordMissing)
+            .expect(404, {
+              error: "Missing a word."
+            })
           })
       })
     })

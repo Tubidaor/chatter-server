@@ -50,6 +50,24 @@ describe('user endpoints', function() {
         })
       })
     })
+    it('Responds with error when no user name', () => {
+      const invalidUser = {user_name: 'user-not', password:"test"}
+
+      return supertest(app)
+        .post('/api/auth/login')
+        .send(invalidUser)
+        .expect(400, {error: 'Incorrect user_name or password'})
+      
+    })
+
+    it('Responds with error when invalid password', () => {
+      const invalidPassword = {user_name: testUsers[0].user_name, password: 'badpw'}
+
+      return supertest(app)
+        .post('/api/auth/login')
+        .send(invalidPassword)
+        .expect(400, {error: 'Incorrect user_name or password'})
+    })
 
     context('validate reg submission', () => {
       const requiredRegFields = [

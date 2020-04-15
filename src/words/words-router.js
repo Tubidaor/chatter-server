@@ -9,7 +9,7 @@ const UserServices = require('../users/user-service');
 
 wordsRouter
   .route('/')
-  .all(requireAuth)
+  // .all(requireAuth)
   .post(jsonBodyParser, (req, res, next) => {
     const { words, child_id } = req.body
    
@@ -75,7 +75,7 @@ wordsRouter
             .status(200)
             .json(allWordsResJson)
         })
-        .done()
+        
       })
       .catch(next)
       
