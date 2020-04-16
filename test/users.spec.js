@@ -90,13 +90,100 @@ describe('user endpoints', function() {
         delete regAttempt[field]
 
         return supertest(app)
-        .post('/api/users')
-        .send(regAttempt)
-        .expect(400, {
-          error: `Missing '${field}' in request body`
-        })
+          .post('/api/users')
+          .send(regAttempt)
+          .expect(400, {
+            error: `Missing '${field}' in request body`
+          })
       })
+
       })
+      it('responds with 400, username already exists', () => {
+        const duplicateUserName = testUsers[0].user_name
+        const newUser = {
+            email: "testemail",
+            user_name: duplicateUserName,
+            password: "TestPassWord17!",
+            first_name: testUsers[0].first_name,
+            last_name: testUsers[0].last_name,
+          }
+          
+        return supertest(app)
+          .post('/api/users')
+          .send(newUser)
+          .expect(400, {error: 'Username already exists'})
+      })
+
+      const badPasswords = [
+        "Short1!",
+        "12!longpasswordthatislongerthan72charactersadgegetdgetdghasdgehbgefhjtyusfghjk",
+        " 17!emptyspacepw",
+        "doesnotcotainnumberorspecial",
+      ]
+
+        
+      
+      it('responds with 400 Password must be longer than 8 characters', () => {
+        const newUser = {
+          email: "testemail",
+          user_name: "testUserName",
+          password: badPasswords[0],
+          first_name: "testfirst",
+          last_name: "testlast",
+        }
+        
+        return supertest(app)
+          .post('/api/users')
+          .send(newUser)
+          .expect(400, {error: 'Password must be longer than 8 characters'})
+      })
+
+      it('responds with 400 Password must be less than 72 characters', () => {
+        const newUser = {
+          email: "testemail",
+          user_name: "testUserName",
+          password: badPasswords[1],
+          first_name: "testfirst",
+          last_name: "testlast",
+        }
+        
+        return supertest(app)
+          .post('/api/users')
+          .send(newUser)
+          .expect(400, {error: 'Password must be less than 72 characters'})
+      })
+
+      it('responds with 400 Password must not start or end with empty spaces', () => {
+        const newUser = {
+          email: "testemail",
+          user_name: "testUserName",
+          password: badPasswords[2],
+          first_name: "testfirst",
+          last_name: "testlast",
+        }
+        
+        return supertest(app)
+          .post('/api/users')
+          .send(newUser)
+          .expect(400, {error: 'Password must not start or end with empty spaces'})
+      })
+
+      it('responds with 400 Password must contain 1 upper case, lower case, number and special character', () => {
+        const newUser = {
+          email: "testemail",
+          user_name: "testUserName",
+          password: badPasswords[3],
+          first_name: "testfirst",
+          last_name: "testlast",
+        }
+        
+        return supertest(app)
+          .post('/api/users')
+          .send(newUser)
+          .expect(400, {error: 'Password must contain 1 upper case, lower case, number and special character'})
+      })
+
+
     })
     })
   }
