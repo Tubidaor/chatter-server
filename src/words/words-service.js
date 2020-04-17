@@ -58,10 +58,4 @@ const WordsService = {
 
 }
 
-
-// cw.date_created AS y, sum(count(cw.words)) OVER (ORDER BY cw.date_created) AS x
-
-
-
-
 module.exports = WordsService

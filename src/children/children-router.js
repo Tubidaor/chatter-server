@@ -28,7 +28,7 @@ childrenRouter
     const { id } = req.user
     for(const field of [ 'name_', 'gender', 'birthdate'])
       if(!req.body[field]) 
-        return res.json({error: `Missing '${field}' in request body`})
+        return res.status(400).json({error: `Missing '${field}' in request body`})
       
     const newChild = {
       name_,
