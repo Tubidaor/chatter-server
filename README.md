@@ -1,26 +1,33 @@
-# Express Boilerplate!
+# Chatter App!
 
-This is a boilerplate project used for starting new projects!
+This is a simple app to store new words a baby learns to to keep track of their progress! # this is the server side.
 
-## Set up
+#Technologies used.
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+Javascript, Node, PostgreSql, Express. 
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+# What does the app do?
 
-## Scripts
 
-Start the application `npm start`
+1. Users can register and creat an account. 
+2. Users can login in securely.
+3. Users can add name of child, and add new words to data base.
+4. The graphical representation of the word count is presented to the user.
+5. User can create multiple children.
 
-Start nodemon for the application `npm run dev`
+# There are several endpoints for this project. They are descrived below.
 
-Run the tests `npm test`
+1. The endpoint to validate users is '/api/auth/login.' This endpoing validates username and password and checks agains database to see if there is an existing user. If there is a match and password is correct, access is granted to the user.
 
-## Deploying
+2. The endpoint for users to register is '/api/users.' User details such as, email, name, username, password as stored in database and used to validate user logins.
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+3. The endpoint to retrieve userdata regarding their children is '/api/children/:user_name.' This endpoint allows the retrieval of the users children.
+
+4. The endpoing to retrieve words by child and to post new words is ''/api/words/:user_name.' Data is retrieved based on user_name. New words are posted to the corresponding child_id.
+
+#Links to site and repo.
+The live app can be found at 'https://chatter-app.juanbaltazar.now.sh'.
+
+Link to the server repo can be found at 'https://github.com/Tubidaor/chatter-server'.
+
+Screenshot of the app can be found at https://github.com/Tubidaor/chatter-server/issues/2.
